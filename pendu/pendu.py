@@ -1,3 +1,4 @@
+# import de la librairie random pour la gestion aléatoire d'une liste
 import random
 
 # fonction qui récupère la liste des étapes du pendu :
