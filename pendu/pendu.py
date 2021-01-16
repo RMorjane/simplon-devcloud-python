@@ -1,10 +1,12 @@
 import random
 
 # fonction qui récupère la liste des étapes du pendu :
-def get_array_from_file(filepath,separator):
+def get_array_from_file(filepath,separator,size=0):
     file = open(filepath,"r")
     rows_array = file.read().split(separator)
     file.close()
+    if int(size) > 0:
+        rows_array = [i for i in rows_array if len(i)==size]
     return rows_array
 
 # fonction qui récupère la chaine de carractère tapé par le user :
@@ -33,9 +35,15 @@ def main_pendu():
 
     error_count = 0
     hidden_letters = []
-    
+    str_word_size = ""
+
+    while(not str_word_size.isdigit()):
+        print("Entrez le nombre de lettres : ")
+        str_word_size = input()
+
+    word_size = int(str_word_size)
+    words_array = get_array_from_file("mots.txt",'\n',word_size)
     word = random.choice(words_array)
-    word_size = len(word)
 
     while(word_size > 0):
         letter = get_input_letter()
@@ -57,6 +65,5 @@ def main_pendu():
     if replay(): main_pendu()
 
 pendu_array = get_array_from_file("pendu.txt",'.')
-words_array = ["test","orange","chambre","sport"]
 
 main_pendu()
