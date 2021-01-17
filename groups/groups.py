@@ -23,11 +23,19 @@ def get_groups_from_names( local_names , nb_groups ):
     size_names = len(local_names)
     i = 1
 
+    print("\nVoici la nouvelle répartion de groupes:\n")
+
     while(size_names > 0):
 
         # crée un tableau selected contenant k items choisis au hasard dans le tableau names
         selected = random.sample(local_names, max_nb_groups)
-        
+
+        # affiche l'indice i et le contenu du tableau selected
+        print("GROUP #%s :" % (i))
+        for elem in selected:
+            print(elem)            
+        print()
+
         # ajoute la liste des noms sélectionnés dans le dictionnaire dict_groups
         dict_groups[i] = selected
         
@@ -103,8 +111,7 @@ def main_groups():
     filepath = input()
     my_names = get_names_from_file(filepath)
     my_groups = get_groups_from_names(my_names,3)
-    str_result = write_json_result(my_groups,"resultat.json")
-    print(str_result)
+    write_json_result(my_groups,"resultat.json")
     write_log_file()
     if replay(): main_groups()
 
