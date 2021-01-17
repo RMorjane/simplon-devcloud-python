@@ -92,12 +92,20 @@ def write_log_file():
     logger.info('Starting application groups')
     logger.warning('Testing %s', 'groups')
 
-print("Entrez le nom du fichier text qui contient tous les noms :")
-filepath = input()
+# fonction booleenne qui permet de savoir si le gestionnaire souhaite ou non créer une nouvelle répartition
+def replay():
+    print("Voulez - vous créer une nouvelle répartition : \noui ( o ) ou non ( n ) ?")
+    reponse = input()
+    return reponse == 'o'
 
-my_names = get_names_from_file(filepath)
-my_groups = get_groups_from_names(my_names,3)
-str_result = write_json_result(my_groups,"resultat.json")
-print(str_result)
+def main_groups():
+    print("Entrez le nom du fichier text qui contient tous les noms :")
+    filepath = input()
+    my_names = get_names_from_file(filepath)
+    my_groups = get_groups_from_names(my_names,3)
+    str_result = write_json_result(my_groups,"resultat.json")
+    print(str_result)
+    write_log_file()
+    if replay(): main_groups()
 
-write_log_file()
+main_groups()
