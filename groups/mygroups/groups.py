@@ -108,25 +108,19 @@ def get_logger():
 
     return logger
 
-# fonction booleenne qui permet de savoir si le gestionnaire souhaite ou non créer une nouvelle répartition
-def replay():
-    print("Voulez - vous créer une nouvelle répartition : \noui ( o ) ou non ( n ) ?")
-    reponse = input()
-    return reponse == 'o'
-
 # programme principal
-def main_groups():
+def main():
 
     logger.info("Starting application groups")
 
-    print("Entrez le chemin du fichier qui contient tous les noms :")
+    print("Entrez le chemin du fichier contenant tous les noms :")
     filepath = input()
 
     my_names = get_names_from_file(filepath)
     logger.info("Getting names from file " + filepath + " OK")
 
     str_nb_groups = ""
-    while(not str_nb_groups.isdigit() or ( int(str_nb_groups)==0 or int(str_nb_groups)>len(my_names))):
+    while( not str_nb_groups.isdigit() or ( int(str_nb_groups)==0 or int(str_nb_groups)>len(my_names) ) ):
         if not str_nb_groups == "":
             logger.error("Error in groups size")
         print("Entrez le nombre de nombre de groupes :")
@@ -143,8 +137,10 @@ def main_groups():
 
     logger.exception("Exception : number of groups entered is not int type")
 
-    if replay(): main_groups()
+    print("Voulez - vous créer une nouvelle répartition : \noui ( o ) ou non ( n ) ?")
+    reponse = input()
+    if reponse == 'o': main()
 
 logger = get_logger()
 
-main_groups()
+#main() appel de cette méthode pour tester l'application

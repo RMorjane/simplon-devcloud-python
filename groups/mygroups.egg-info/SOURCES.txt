@@ -1,0 +1,9 @@
+README.md
+setup.py
+mygroups/__init__.py
+mygroups/groups.py
+mygroups.egg-info/PKG-INFO
+mygroups.egg-info/SOURCES.txt
+mygroups.egg-info/dependency_links.txt
+mygroups.egg-info/entry_points.txt
+mygroups.egg-info/top_level.txt

@@ -1,81 +1,96 @@
-2021-01-14 02:52:27,047 :: INFO :: Starting application groups
-2021-01-14 02:52:27,048 :: WARNING :: Testing groups
-2021-01-14 02:54:46,097 :: INFO :: Starting application groups
-2021-01-14 02:54:46,097 :: WARNING :: Testing groups
-2021-01-14 03:11:08,634 :: INFO :: Starting application groups
-2021-01-14 03:11:08,635 :: WARNING :: Testing groups
-2021-01-14 03:14:02,501 :: INFO :: Starting application groups
-2021-01-14 03:14:02,501 :: WARNING :: Testing groups
-2021-01-14 03:47:15,250 :: INFO :: Starting application groups
-2021-01-14 03:47:15,250 :: WARNING :: Testing groups
-2021-01-17 23:10:48,095 :: INFO :: Starting application groups
-2021-01-17 23:10:48,096 :: WARNING :: Testing groups
-2021-01-17 23:11:26,616 :: INFO :: Starting application groups
-2021-01-17 23:11:26,616 :: INFO :: Starting application groups
-2021-01-17 23:11:26,618 :: WARNING :: Testing groups
-2021-01-17 23:11:26,618 :: WARNING :: Testing groups
-2021-01-17 23:11:41,776 :: INFO :: Starting application groups
-2021-01-17 23:11:41,776 :: INFO :: Starting application groups
-2021-01-17 23:11:41,776 :: INFO :: Starting application groups
-2021-01-17 23:11:41,779 :: WARNING :: Testing groups
-2021-01-17 23:11:41,779 :: WARNING :: Testing groups
-2021-01-17 23:11:41,779 :: WARNING :: Testing groups
-2021-01-17 23:13:39,935 :: INFO :: Starting application groups
-2021-01-17 23:13:39,936 :: WARNING :: Testing groups
-2021-01-17 23:13:51,708 :: INFO :: Starting application groups
-2021-01-17 23:13:51,708 :: INFO :: Starting application groups
-2021-01-17 23:13:51,710 :: WARNING :: Testing groups
-2021-01-17 23:13:51,710 :: WARNING :: Testing groups
-2021-01-17 23:43:05,027 :: INFO :: Starting application groups
-2021-01-17 23:43:05,076 :: WARNING :: Testing groups
-2021-01-17 23:51:43,823 :: INFO :: Starting application groups
-2021-01-17 23:51:43,823 :: WARNING :: Testing groups
-2021-01-20 12:19:23,005 :: INFO :: Starting application groups
-2021-01-20 12:19:39,020 :: INFO :: Reading file groups.txt OK
-2021-01-20 12:19:39,051 :: INFO :: Generation json file resultat.json OK
-2021-01-20 12:54:12,093 :: INFO :: Starting application groups
-2021-01-20 12:54:25,201 :: ERROR :: Error in groups size
-2021-01-20 12:54:27,971 :: ERROR :: Error in groups size
-2021-01-20 12:54:31,472 :: INFO :: Reading file groups.txt OK
-2021-01-20 12:54:31,472 :: INFO :: Getting names from file groups.txt OK
-2021-01-20 12:54:31,493 :: INFO :: Getting groups from names OK
-2021-01-20 12:54:31,506 :: INFO :: Generation json file resultat.json OK
-2021-01-20 12:54:31,508 :: ERROR :: Exception : number of groups entered is not int type
+2021-01-20 23:47:40,494 :: INFO :: Starting application groups
+2021-01-20 23:47:50,785 :: ERROR :: Error in openning file groups.txt
+2021-01-20 23:47:50,785 :: INFO :: Getting names from file groups.txt OK
+2021-01-20 23:47:54,468 :: ERROR :: Error in groups size
+2021-01-20 23:48:15,423 :: ERROR :: Error in groups size
+2021-01-20 23:48:18,489 :: ERROR :: Error in groups size
+2021-01-20 23:51:17,218 :: INFO :: Starting application groups
+2021-01-20 23:51:26,429 :: ERROR :: Error in openning file groups.txt
+2021-01-20 23:51:26,429 :: INFO :: Getting names from file groups.txt OK
+2021-01-20 23:51:30,629 :: ERROR :: Error in groups size
+2021-01-20 23:58:19,765 :: INFO :: Starting application groups
+2021-01-20 23:58:30,832 :: ERROR :: Error in openning file groups.txt
+2021-01-20 23:58:30,833 :: INFO :: Getting names from file groups.txt OK
+2021-01-20 23:58:51,654 :: ERROR :: Error in groups size
+2021-01-21 00:01:22,066 :: INFO :: Starting application groups
+2021-01-21 00:03:39,917 :: INFO :: Reading file e:\Formation simplon\python\exos\groups\mygroups\groups.txt OK
+2021-01-21 00:03:39,917 :: INFO :: Getting names from file e:\Formation simplon\python\exos\groups\mygroups\groups.txt OK
+2021-01-21 00:03:42,878 :: INFO :: Getting groups size OK
+2021-01-21 00:03:42,890 :: INFO :: Getting groups from names OK
+2021-01-21 00:03:42,901 :: INFO :: Generation json file resultat.json OK
+2021-01-21 00:03:42,902 :: ERROR :: Exception : number of groups entered is not int type
 NoneType: None
-2021-01-20 13:19:16,138 :: INFO :: Starting application groups
-2021-01-20 13:19:21,469 :: INFO :: Reading file groups.txt OK
-2021-01-20 13:19:21,470 :: INFO :: Getting names from file groups.txt OK
-2021-01-20 13:21:41,471 :: INFO :: Starting application groups
-2021-01-20 13:21:48,324 :: INFO :: Reading file groups.txt OK
-2021-01-20 13:21:48,324 :: INFO :: Getting names from file groups.txt OK
-2021-01-20 13:53:26,097 :: INFO :: Starting application groups
-2021-01-20 13:53:32,903 :: INFO :: Reading file groups.txt OK
-2021-01-20 13:53:32,903 :: INFO :: Getting names from file groups.txt OK
-2021-01-20 13:53:38,739 :: INFO :: Getting groups size OK
-2021-01-20 13:58:59,305 :: INFO :: Starting application groups
-2021-01-20 13:59:07,645 :: INFO :: Reading file groups.txt OK
-2021-01-20 13:59:07,646 :: INFO :: Getting names from file groups.txt OK
-2021-01-20 13:59:13,970 :: ERROR :: Error in groups size
-2021-01-20 13:59:24,515 :: INFO :: Getting groups size OK
-2021-01-20 13:59:24,535 :: INFO :: Getting groups from names OK
-2021-01-20 13:59:24,547 :: INFO :: Generation json file resultat.json OK
-2021-01-20 13:59:24,548 :: ERROR :: Exception : number of groups entered is not int type
+2021-01-21 00:04:09,185 :: INFO :: Starting application groups
+2021-01-21 00:05:59,463 :: INFO :: Starting application groups
+2021-01-21 00:06:08,438 :: INFO :: Reading file groups.txt OK
+2021-01-21 00:06:08,438 :: INFO :: Getting names from file groups.txt OK
+2021-01-21 00:06:10,914 :: INFO :: Getting groups size OK
+2021-01-21 00:06:10,931 :: INFO :: Getting groups from names OK
+2021-01-21 00:06:10,940 :: INFO :: Generation json file resultat.json OK
+2021-01-21 00:06:10,940 :: ERROR :: Exception : number of groups entered is not int type
 NoneType: None
-2021-01-20 13:59:29,097 :: INFO :: Starting application groups
-2021-01-20 13:59:35,955 :: INFO :: Reading file groups.txt OK
-2021-01-20 13:59:35,955 :: INFO :: Getting names from file groups.txt OK
-2021-01-20 13:59:43,245 :: INFO :: Getting groups size OK
-2021-01-20 13:59:43,272 :: INFO :: Getting groups from names OK
-2021-01-20 13:59:43,274 :: INFO :: Generation json file resultat.json OK
-2021-01-20 13:59:43,275 :: ERROR :: Exception : number of groups entered is not int type
+2021-01-21 00:06:15,562 :: INFO :: Starting application groups
+2021-01-21 00:10:31,135 :: INFO :: Reading file groups.txt OK
+2021-01-21 00:10:31,136 :: INFO :: Getting names from file groups.txt OK
+2021-01-21 00:10:36,363 :: INFO :: Getting groups size OK
+2021-01-21 00:10:36,382 :: INFO :: Getting groups from names OK
+2021-01-21 00:10:36,383 :: INFO :: Generation json file resultat.json OK
+2021-01-21 00:10:36,385 :: ERROR :: Exception : number of groups entered is not int type
 NoneType: None
-2021-01-20 13:59:48,087 :: INFO :: Starting application groups
-2021-01-20 13:59:54,043 :: INFO :: Reading file groups.txt OK
-2021-01-20 13:59:54,043 :: INFO :: Getting names from file groups.txt OK
-2021-01-20 13:59:57,437 :: ERROR :: Error in groups size
-2021-01-20 13:59:59,260 :: ERROR :: Error in groups size
-2021-01-20 14:00:02,124 :: INFO :: Getting groups size OK
-2021-01-20 14:00:02,143 :: INFO :: Getting groups from names OK
-2021-01-20 14:00:02,146 :: INFO :: Generation json file resultat.json OK
-2021-01-20 14:00:02,147 :: ERROR :: Exception : number of groups entered is not int type
+2021-01-21 00:11:13,731 :: INFO :: Starting application groups
+2021-01-21 00:11:20,775 :: INFO :: Reading file groups.txt OK
+2021-01-21 00:11:20,776 :: INFO :: Getting names from file groups.txt OK
+2021-01-21 00:11:24,510 :: INFO :: Getting groups size OK
+2021-01-21 00:11:24,542 :: INFO :: Getting groups from names OK
+2021-01-21 00:11:24,554 :: INFO :: Generation json file resultat.json OK
+2021-01-21 00:11:24,555 :: ERROR :: Exception : number of groups entered is not int type
+NoneType: None
+2021-01-21 00:11:28,687 :: INFO :: Starting application groups
+2021-01-21 00:11:44,422 :: INFO :: Reading file groups.txt OK
+2021-01-21 00:11:44,422 :: INFO :: Getting names from file groups.txt OK
+2021-01-21 00:11:46,764 :: INFO :: Getting groups size OK
+2021-01-21 00:11:46,779 :: INFO :: Getting groups from names OK
+2021-01-21 00:11:46,780 :: INFO :: Generation json file resultat.json OK
+2021-01-21 00:11:46,781 :: ERROR :: Exception : number of groups entered is not int type
+NoneType: None
+2021-01-21 00:16:56,690 :: INFO :: Starting application groups
+2021-01-21 00:17:04,667 :: INFO :: Reading file groups.txt OK
+2021-01-21 00:17:04,667 :: INFO :: Getting names from file groups.txt OK
+2021-01-21 00:17:07,710 :: INFO :: Getting groups size OK
+2021-01-21 00:17:07,732 :: INFO :: Getting groups from names OK
+2021-01-21 00:17:07,740 :: INFO :: Generation json file resultat.json OK
+2021-01-21 00:17:07,741 :: ERROR :: Exception : number of groups entered is not int type
+NoneType: None
+2021-01-21 00:17:13,861 :: INFO :: Starting application groups
+2021-01-21 00:19:47,923 :: INFO :: Starting application groups
+2021-01-21 00:19:57,246 :: INFO :: Reading file groups.txt OK
+2021-01-21 00:19:57,246 :: INFO :: Getting names from file groups.txt OK
+2021-01-21 00:20:00,021 :: INFO :: Getting groups size OK
+2021-01-21 00:20:00,044 :: INFO :: Getting groups from names OK
+2021-01-21 00:20:00,052 :: INFO :: Generation json file resultat.json OK
+2021-01-21 00:20:00,053 :: ERROR :: Exception : number of groups entered is not int type
+NoneType: None
+2021-01-21 00:20:22,255 :: INFO :: Starting application groups
+2021-01-21 00:20:28,280 :: INFO :: Reading file groups.txt OK
+2021-01-21 00:20:28,280 :: INFO :: Getting names from file groups.txt OK
+2021-01-21 00:20:30,927 :: INFO :: Getting groups size OK
+2021-01-21 00:20:30,948 :: INFO :: Getting groups from names OK
+2021-01-21 00:20:30,956 :: INFO :: Generation json file resultat.json OK
+2021-01-21 00:20:30,957 :: ERROR :: Exception : number of groups entered is not int type
+NoneType: None
+2021-01-21 00:20:35,384 :: INFO :: Starting application groups
+2021-01-21 00:20:43,728 :: INFO :: Reading file groups.txt OK
+2021-01-21 00:20:43,728 :: INFO :: Getting names from file groups.txt OK
+2021-01-21 00:20:45,599 :: INFO :: Getting groups size OK
+2021-01-21 00:20:45,614 :: INFO :: Getting groups from names OK
+2021-01-21 00:20:45,615 :: INFO :: Generation json file resultat.json OK
+2021-01-21 00:20:45,615 :: ERROR :: Exception : number of groups entered is not int type
+NoneType: None
+2021-01-21 00:20:59,955 :: INFO :: Starting application groups
+2021-01-21 00:21:05,857 :: INFO :: Reading file groups.txt OK
+2021-01-21 00:21:05,858 :: INFO :: Getting names from file groups.txt OK
+2021-01-21 00:21:08,972 :: INFO :: Getting groups size OK
+2021-01-21 00:21:08,989 :: INFO :: Getting groups from names OK
+2021-01-21 00:21:08,998 :: INFO :: Generation json file resultat.json OK
+2021-01-21 00:21:08,999 :: ERROR :: Exception : number of groups entered is not int type
 NoneType: None
