@@ -100,7 +100,7 @@ def main_pendu():
                 print(pendu_array[error_count])
                 error_count += 1
                 if error_count == 5:
-                    print("Partie perdue !!!\n")
+                    print("Partie perdue !!!")
                     logger.info("Game loss")
                     break
         else:
