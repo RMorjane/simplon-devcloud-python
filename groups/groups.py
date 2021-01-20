@@ -8,10 +8,15 @@
 # fonction permettant de récupérer la liste des noms à partir d'un fichier texte :
 
 def get_names_from_file(filepath):
-    file = open(filepath,"r")
-    names = file.read().split('\n')
-    file.close()
-    return names
+    try:
+        file = open(filepath,"r")
+        names = file.read().split('\n')
+        file.close()
+        logger.info("Reading file " + filepath + " OK")
+        return names
+    except:
+        logger.error("Error in openning file " + filepath)
+        return []
 
 
 def get_groups_from_names( local_names , nb_groups ):
@@ -59,14 +64,18 @@ def write_json_result( local_dict_groups , json_filepath ):
 
     str_response = ""
 
-    with open(json_filepath,'w') as file:
-        json.dump(local_dict_groups,file,indent=4,ensure_ascii=False,sort_keys=True)
-        str_response = json.dumps(local_dict_groups)
+    try:
+        with open(json_filepath,'w') as file:
+            json.dump(local_dict_groups,file,indent=4,ensure_ascii=False,sort_keys=True)
+            str_response = json.dumps(local_dict_groups)
+            logger.info("Generation json file " + json_filepath + " OK")
+    except:
+        logger.error("Error in generating json file " + json_filepath)
 
     return str_response
 
-
-def write_log_file():
+# fonction qui retourne le logger
+def get_logger():
 
     import logging
  
@@ -93,12 +102,11 @@ def write_log_file():
     
     # création d'un second handler qui va rediriger chaque écriture de log
     # sur la console
-    stream_handler = logging.StreamHandler()
-    stream_handler.setLevel(logging.DEBUG)
-    logger.addHandler(stream_handler)
+    # stream_handler = logging.StreamHandler()
+    # stream_handler.setLevel(logging.DEBUG)
+    # logger.addHandler(stream_handler)
 
-    logger.info('Starting application groups')
-    logger.warning('Testing %s', 'groups')
+    return logger
 
 # fonction booleenne qui permet de savoir si le gestionnaire souhaite ou non créer une nouvelle répartition
 def replay():
@@ -106,13 +114,37 @@ def replay():
     reponse = input()
     return reponse == 'o'
 
+# programme principal
 def main_groups():
-    print("Entrez le nom du fichier text qui contient tous les noms :")
+
+    logger.info("Starting application groups")
+
+    print("Entrez le chemin du fichier qui contient tous les noms :")
     filepath = input()
+
     my_names = get_names_from_file(filepath)
-    my_groups = get_groups_from_names(my_names,3)
+    logger.info("Getting names from file " + filepath + " OK")
+
+    str_nb_groups = ""
+    while(not str_nb_groups.isdigit() or ( int(str_nb_groups)==0 or int(str_nb_groups)>len(my_names))):
+        if not str_nb_groups == "":
+            logger.error("Error in groups size")
+        print("Entrez le nombre de nombre de groupes :")
+        str_nb_groups = input()
+
+    nb_groups = int(str_nb_groups)
+
+    logger.info("Getting groups size OK")
+
+    my_groups = get_groups_from_names(my_names,nb_groups)
+    logger.info("Getting groups from names OK")
+
     write_json_result(my_groups,"resultat.json")
-    write_log_file()
+
+    logger.exception("Exception : number of groups entered is not int type")
+
     if replay(): main_groups()
+
+logger = get_logger()
 
 main_groups()
