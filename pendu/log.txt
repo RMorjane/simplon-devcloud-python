@@ -1,0 +1,16 @@
+2021-01-20 11:43:33,551 :: INFO :: Reading file pendu.txt
+2021-01-20 11:43:33,552 :: INFO :: Starting application pendu
+2021-01-20 11:43:33,553 :: INFO :: Reading word size
+2021-01-20 11:43:38,168 :: INFO :: Getting word size OK
+2021-01-20 11:43:38,327 :: INFO :: Reading file mots.txt
+2021-01-20 11:43:41,338 :: ERROR :: Error : Letter a not in word y
+Printing pendu
+2021-01-20 11:43:43,429 :: ERROR :: Error : Letter u not in word y
+Printing pendu
+2021-01-20 11:43:46,031 :: ERROR :: Error : Letter n not in word y
+Printing pendu
+2021-01-20 11:43:48,221 :: ERROR :: Error : Letter s not in word y
+Printing pendu
+2021-01-20 11:43:51,749 :: ERROR :: Error : Letter t not in word y
+Printing pendu
+2021-01-20 11:43:51,757 :: INFO :: Game loss
