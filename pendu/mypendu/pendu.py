@@ -20,12 +20,6 @@ def display_hidden_letter(local_hidden_letters,local_word):
             hidden_word += '_ '
     print(hidden_word)
 
-# fonction booleenne qui permet de savoir si le joueur souhaite ou non continuer la partie
-def replay():
-    print("Voulez - vous continuez la partie : \noui ( o ) ou non ( n ) ?")
-    reponse = input()
-    return reponse == 'o'
-
 def get_logger():
 
     import logging
@@ -60,7 +54,7 @@ def get_logger():
     return logger
 
 # programme principal
-def main_pendu():
+def main():
 
     error_count = 0
     hidden_letters = []
@@ -106,11 +100,13 @@ def main_pendu():
         else:
             logger.error("Error in format of the letter")
 
-    if replay(): main_pendu()
+    print("Voulez - vous continuez la partie : \noui ( o ) ou non ( n ) ?")
+    reponse = input()
+    if reponse == 'o': main()
 
 logger = get_logger()
 
 logger.info("Reading file pendu.txt")
 pendu_array = get_array_from_file("pendu.txt",'.')
 
-main_pendu()
+#main()

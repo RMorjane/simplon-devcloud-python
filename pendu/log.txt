@@ -14,3 +14,14 @@ Printing pendu
 2021-01-20 11:43:51,749 :: ERROR :: Error : Letter t not in word y
 Printing pendu
 2021-01-20 11:43:51,757 :: INFO :: Game loss
+2021-01-21 00:35:14,837 :: INFO :: Reading file pendu.txt
+2021-01-21 00:35:14,859 :: INFO :: Starting application pendu
+2021-01-21 00:35:14,859 :: INFO :: Reading word size
+2021-01-21 00:35:18,636 :: INFO :: Getting word size OK
+2021-01-21 00:35:18,870 :: INFO :: Reading file mots.txt
+2021-01-21 00:35:22,459 :: ERROR :: Error : Letter a not in word y Printing pendu
+2021-01-21 00:35:25,218 :: ERROR :: Error : Letter u not in word y Printing pendu
+2021-01-21 00:35:28,150 :: ERROR :: Error : Letter n not in word y Printing pendu
+2021-01-21 00:35:34,555 :: ERROR :: Error : Letter q not in word y Printing pendu
+2021-01-21 00:35:37,164 :: ERROR :: Error : Letter p not in word y Printing pendu
+2021-01-21 00:35:37,170 :: INFO :: Game loss

@@ -1,0 +1,9 @@
+README.md
+setup.py
+mypendu/__init__.py
+mypendu/pendu.py
+mypendu.egg-info/PKG-INFO
+mypendu.egg-info/SOURCES.txt
+mypendu.egg-info/dependency_links.txt
+mypendu.egg-info/entry_points.txt
+mypendu.egg-info/top_level.txt
