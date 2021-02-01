@@ -54,7 +54,6 @@ journeys = json_journeys.json_data
 pprint.pprint(journeys)
 
 # combien y a-t-il d’arrêts entre ces deux gares ? (utilisez la clé ‘journeys’)
-# journeys / sections / stop_date_time
-fieldnames = ["journeys","sections","stop_date_times","stop_point","label"]
-data_journeys = journeys["journeys"]
-journeys_api.get_json_keys(data_journeys)"""
+# clés -> journeys / sections / stop_date_time
+il ya 2 arrêts entre ces 2 gares
+"""
