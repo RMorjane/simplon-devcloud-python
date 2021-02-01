@@ -2,150 +2,112 @@ import csv
 import json
 import requests
 import pprint
+import pandas
 
+class JsonSncfApi:
 
+    def __init__(self):
+        self.url = "https://api.sncf.com/v1/coverage/sncf/stop_areas"
+        self.headers = {"Authorization": 'b8d19b5e-f838-462b-9f30-334d98cd15a8'}
+        self.json_filename = "stop_areas"
+        self.csv_filename = ""
+        self.json_data = {}
+        self.list_keys = []
+        self.list_hrefs = []
+        self.data_rows = []
 
-
-def get_json_data(json_file):
-    json_data = None
-    with open(json_file, 'r') as f:
-        data = f.read()
-        json_data = json.loads(data)
-        f.close()
-    return json_data
-
-
-
-
-def dump_json_data(json_file,key,entry):
-
-    json_data = None
-
-    with open(json_file) as f:
-        json_data = json.load(f)
-        json_data[key].append(entry)
-        
-    with open(json_file, 'w') as f:   
-        json.dump(json_data,f)
-        #f.write(json.dumps(json_data, indent=2))
-        f.close()
+    def set_url(self,url):
+        self.url = url
     
-    return json_data
+    def set_json_filename(self,json_filename):
+        self.json_filename = json_filename
 
+    def read_json_file(self):
 
+        with open(self.json_filename + ".json", 'r') as f:
+            data = f.read()
+            self.json_data = json.loads(data)
+            f.close()
 
+    def read_json_url(self):
 
-# affichage du fichier json avec le module prettyprint
-def display_json_file():
-    json_data = get_json_data('stop_areas.json')
-    pprint.pprint(json_data)
+        response = requests.get(self.url,headers = self.headers)
+        if response.status_code == 200:
+            self.json_data = json.loads(response.text)
+            json.dumps(self.json_data, indent=2)
+        else:
+            print("Erreur de connexion")
 
+    def save_json(self):
 
+        with open(self.json_filename + ".json", 'w') as f:   
+            #json.dump(self.json_data,f)
+            f.write(json.dumps(self.json_data, indent=4))
+            f.close()
 
+    def add_json_entry(self,key,entry):
 
-# ajout d'un arrêt dans le json
-def add_json_entry():
+        with open(self.json_filename + ".json") as f:
+            self.json_data = json.load(f)
+            self.json_data[key].append(entry)
+        self.save_json()
 
-    entry = {
-        'href': 'https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/test',
-        'rel': 'stop_areas',
-        'templated': True,
-        'type': 'stop_areas'        
-    }
+    def get_data_rows(self,fieldnames,key,data):
+        # création d'une liste avec la liste des champs à afficher comme premier élémént
+        self.data_rows = [fieldnames]
+        if type(self.json_data)==dict:
+            if type(self.json_data[key])==list:
+                for field in fieldnames:
+                    # création d'une liste contenant les valeurs de chaque champ (field)
+                    rows = [loop_data[field] for loop_data in self.json_data[key] if field in loop_data.keys()]
+                    i = 0
+                    for item in rows:
+                        i += 1
+                        try: # si la valeur du data_row[i] existe
+                            self.data_rows[i].append(item)
+                        except: # sinon on crée une nouvelle liste contenant la valeur du champs à afficher
+                            self.data_rows.append([item])
 
-    json_data = dump_json_data('stop_areas.json','links',entry)
-    pprint.pprint(json_data)
+    def read_links(self):
+        self.get_key_values("href",self.json_data)
+        self.list_hrefs = self.list_keys
+        self.get_data_rows(["href"],"links",self.json_data)
+        self.csv_filename = "links"
 
+    def csv_export(self):   
+        # création du fichier csv
+        with open(self.csv_filename + ".csv",mode="w",newline='') as f:
+            # newline='' pour éliminer les lignes vides du fichier csv
+            csv_writer = csv.writer(f,delimiter=';')
+            if type(self.data_rows)==list:
+                for row in self.data_rows:
+                    # écriture du contenu du row dans la nouvelle ligne du fichier csv
+                    csv_writer.writerow(row)
+            f.close()
 
-def get_json_data_url(url,headers):
+    # fonction permettant d'afficher l'arborescence des clés du json data
+    def get_json_keys(self,data,i=0):
+        i += 1
+        if type(data) == dict:
+            for key,value in dict(data).items():
+                print("    "*(i-1)+"|---->",key,"(dict)")
+                self.get_json_keys(value,i)
+        elif type(data) == list:
+            for loop_data in list(data):
+                self.get_json_keys(loop_data,i)
 
-    response = requests.get(url,headers = headers)
+    # fonction qui permet de récupérer la liste des valeurs d'une clé dans le json
+    def get_key_values(self,local_key,data):
+        if type(data) == dict:
+            for key,value in dict(data).items():
+                if key == local_key:
+                    self.list_keys.append(value)
+                else:
+                    self.get_key_values(local_key,value)
+        elif type(data) == list:
+            for loop_data in list(data):
+                self.get_key_values(local_key,loop_data)
 
-    if response.status_code == 200: # HTTP 200 OK
-        json_data = json.loads(response.text)
-        json.dumps(json_data, indent=2)
-        return json_data
-    else:
-        return None
-
-def cvs_export(filepath,data_rows):   
-    # création du fichier csv
-    with open(filepath,mode="w",newline='') as f:
-        # newline='' pour éliminer les lignes vides du fichier csv
-        csv_writer = csv.writer(f,delimiter=';')
-        if type(data_rows)==list:
-            for row in data_rows:
-                # écriture du contenu du row dans la nouvelle ligne du fichier csv
-                csv_writer.writerow(row)
-        f.close()
-
-def get_data_rows(fieldnames,key,data):
-    # création d'une liste avec la liste des champs à afficher comme premier élémént
-    data_rows = [fieldnames]
-    if type(data)==dict:
-        if type(data[key])==list:
-            for field in fieldnames:
-                # création d'une liste contenant les valeurs de chaque champ (field)
-                rows = [loop_data[field] for loop_data in data[key] if field in loop_data.keys()]
-                i = 0
-                for item in rows:
-                    i += 1
-                    try: # si la valeur du data_row[i] existe
-                        data_rows[i].append(item)
-                    except: # sinon on crée une nouvelle liste contenant la valeur du champs à afficher
-                        data_rows.append([item])
-    
-    return data_rows
-
-def main():
-
-    # requeter une api avec le module requests
-    url = "https://api.sncf.com/v1/coverage/sncf/stop_areas"
-    headers = {"Authorization": 'b8d19b5e-f838-462b-9f30-334d98cd15a8'}
-    
-    # récupération des données au format json
-    json_data = get_json_data_url(url,headers)
-    print(type(json_data))
-
-    # création d'une liste de champs à afficher
-    field_areas = ["id","name","codes","coord","administrative_regions"]
-
-    # création d'une liste contenant la liste des champs à afficher
-    # et la valeur de ces derniers ligne par ligne lorsqu'ils existent
-    data_areas = get_data_rows(field_areas,"stop_areas",json_data)
-
-    # enregistrement de cette liste dans un fichier gares.csv
-    cvs_export("gares.csv",data_areas)
-
-    """# récupération des informations sur un trajet entre Paris Gare de Lyon et Lyon Perrache
-    # en utilisant la requête journey (blocage à ce niveau la)
-
-    # from Paris - Gare de Lyon
-    depart = "stop_area:OCE:SA:87686006"
-    # to Lyon - Perrache
-    arrival = "stop_area:OCE:SA:87722025"
-
-    # request journey
-    url = f"https://api.sncf.com/v1/journeys?from={depart}&to={arrival}"
-    json_journeys = get_json_data_url(url,headers)
-    print(type(json_journeys))
-    #pprint.pprint(json_journeys)
-
-    # combien y a-t-il d’arrêts entre ces deux gares ? (utilisez la clé ‘journeys’)
-    #fieldnames = ["journeys","sections","stop_date_times","stop_point","label"]
-    data_journeys = json_journeys["journeys"]
-    print(type(data_journeys))
-    print(len(data_journeys))
-
-    if type(data_journeys) == list:
-        for loop_data_journeys in data_journeys:
-            print(type(loop_data_journeys))
-            if type(loop_data_journeys) == dict:
-                if "sections" in loop_data_journeys:
-                    print(len(loop_data_journeys["sections"]))
-                    print(type(loop_data_journeys["sections"]))
-                    if type(loop_data_journeys["sections"]) == list:
-                        for loop_sections in loop_data_journeys["sections"]:
-                            print(type(loop_sections))"""
-
-main()
+    def read_csv(self):
+        output = pandas.read_csv(self.csv_filename + ".csv",sep=';',index_col=0)
+        print(output)

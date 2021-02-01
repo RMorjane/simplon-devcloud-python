@@ -1,0 +1,12 @@
+href
+https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}
+https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/route_schedules
+https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/stop_schedules
+https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/arrivals
+https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/departures
+https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/places_nearby
+https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/journeys
+https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/traffic_reports
+https://api.sncf.com/v1/coverage/sncf/stop_areas?start_page=1
+https://api.sncf.com/v1/coverage/sncf/stop_areas?start_page=172
+https://api.sncf.com/v1/coverage/sncf/stop_areas
