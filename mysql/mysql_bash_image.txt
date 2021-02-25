@@ -1,0 +1,130 @@
+PS C:\Users\MICRO\simplon\devcloud\mysql_exos> docker pull mysql:8.0.21
+8.0.21: Pulling from library/mysql
+bb79b6b2107f: Pull complete
+49e22f6fb9f7: Pull complete
+842b1255668c: Pull complete
+9f48d1f43000: Pull complete
+c693f0615bce: Pull complete
+8a621b9dbed2: Pull complete
+0807d32aef13: Pull complete
+9eb4355ba450: Pull complete
+6879faad3b6c: Pull complete
+164ef92f3887: Pull complete
+6e4a6e666228: Pull complete
+d45dea7731ad: Pull complete
+Digest: sha256:86b7c83e24c824163927db1016d5ab153a9a04358951be8b236171286e3289a4
+Status: Downloaded newer image for mysql:8.0.21
+docker.io/library/mysql:8.0.21
+PS C:\Users\MICRO\simplon\devcloud\mysql_exos> docker images
+REPOSITORY          TAG       IMAGE ID       CREATED        SIZE
+docker101tutorial   latest    89c4f6f214af   6 hours ago    27.7MB
+alpine/git          latest    04dbb58d2cea   2 weeks ago    25.1MB
+mysql               8.0.21    8e85dd5c3255   3 months ago   544MB
+PS C:\Users\MICRO\simplon\devcloud\mysql_exos> docker run --name mysql-server -p 4406:3306 -e MYSQL_USER=root -e MYSQL_ROOT_PASSWORD=Oumaima1* -d mysql:8.0.21
+f98c63996b581fc36d0d22aa96c74dfd4b4d2c874dbffab3fae25e0172a3d55b
+PS C:\Users\MICRO\simplon\devcloud\mysql_exos> docker exec -it mysql-server bash
+root@f98c63996b58:/# mysql -uroot -pOumaima1*
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.21 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.01 sec)
+
+root@f98c63996b58:/#
+mysql -u root -e "CREATE DATABASE test" && \
+mysql -u root mydb < test.sql
+
+
+docker run -ti --name test -v C:\Users\MICRO\simplon\devcloud\mysql_exos\test:/jsapp -w /jsapp -d node
+c11144467bc9c1fd1c50144640f137a653a7f7ae176579d5c06fcf117a8eeb1d
+
+C:\Users\MICRO\simplon\devcloud\mysql_exos>docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                      PORTS                               NAMES
+c11144467bc9   node           "docker-entrypoint.s…"   20 seconds ago   Up 12 seconds                                                   test
+f98c63996b58   mysql:8.0.21   "docker-entrypoint.s…"   3 days ago       Exited (255) 10 hours ago   33060/tcp, 0.0.0.0:4406->3306/tcp   mysql-server
+
+C:\Users\MICRO\simplon\devcloud\mysql_exos>docker start mysql-server
+mysql-server
+
+C:\Users\MICRO\simplon\devcloud\mysql_exos>docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS              PORTS                               NAMES
+c11144467bc9   node           "docker-entrypoint.s…"   About a minute ago   Up About a minute                                       test
+f98c63996b58   mysql:8.0.21   "docker-entrypoint.s…"   3 days ago           Up 52 seconds       33060/tcp, 0.0.0.0:4406->3306/tcp   mysql-server
+
+C:\Users\MICRO\simplon\devcloud\mysql_exos>docker network connect simplon mysql-server
+Error response from daemon: endpoint with name mysql-server already exists in network simplon
+
+C:\Users\MICRO\simplon\devcloud\mysql_exos>docker network connect simplon test
+
+C:\Users\MICRO\simplon\devcloud\mysql_exos>docker network inspect simplon
+[
+    {
+        "Name": "simplon",
+        "Id": "420cfb4add0e8cff1614a31d87490d94cc75ada628cde65c2b03d1b526db8595",
+        "Created": "2021-02-08T13:16:46.6296348Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "c11144467bc9c1fd1c50144640f137a653a7f7ae176579d5c06fcf117a8eeb1d": {
+                "Name": "test",
+                "EndpointID": "c80d8f90eb09e60c00a43b88cf5b8f4892a161d5ad5f96d4909d95d9a078a600",
+                "MacAddress": "02:42:ac:12:00:03",
+                "IPv4Address": "172.18.0.3/16",
+                "IPv6Address": ""
+            },
+            "f98c63996b581fc36d0d22aa96c74dfd4b4d2c874dbffab3fae25e0172a3d55b": {
+                "Name": "mysql-server",
+                "EndpointID": "7d9b339eb384973ec114f6681c093569e4da8780a20117fb7047e0aeb612a4cc",
+                "MacAddress": "02:42:ac:12:00:02",
+                "IPv4Address": "172.18.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+
+C:\Users\MICRO\simplon\devcloud\mysql_exos>docker exec -tid test bash
+
+C:\Users\MICRO\simplon\devcloud\mysql_exos>docker exec -ti test bash
+root@c11144467bc9:/jsapp# ls
+test.js
+root@c11144467bc9:/jsapp# cat test.js
+console.log("hello")root@c11144467bc9:/jsapp# node test.js
+hello

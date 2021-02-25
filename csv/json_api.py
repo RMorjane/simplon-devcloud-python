@@ -22,6 +22,9 @@ class JsonSncfApi:
     def set_json_filename(self,json_filename):
         self.json_filename = json_filename
 
+    def set_csv_filename(self,csv_filename):
+        self.csv_filename = csv_filename
+
     def read_json_file(self):
 
         with open(self.json_filename + ".json", 'r') as f:
