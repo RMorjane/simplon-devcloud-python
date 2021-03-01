@@ -58,82 +58,99 @@ class RecipeInfo:
 
         mysql_recipe = MySQLRecipe()
         mysql_recipe.connect()
-        cursor = mysql_recipe.connection.cursor()
 
-        add_recipe = "INSERT INTO recipe(recipe_name,recipe_url) values('{0}','{1}')".format(self.recipe_name,self.url)
-        cursor.execute(add_recipe)
-        mysql_recipe.connection.commit()
-        recipe_id = cursor.lastrowid
+        recipe_id = 0
+        sql_recipe_id = mysql_recipe.get_recipe_id(self.recipe_name)
+        if sql_recipe_id and type(sql_recipe_id)==tuple:
+            recipe_id = sql_recipe_id[0]
+            print(recipe_id," : ",self.recipe_name," already exists")
+        else:
+            cursor = mysql_recipe.connection.cursor()
+            add_recipe = "INSERT INTO recipe(recipe_name,recipe_url) values('{0}','{1}')".format(self.recipe_name,self.url)
+            cursor.execute(add_recipe)
+            mysql_recipe.connection.commit()
+            recipe_id = cursor.lastrowid
 
-        usage = "ingredient"
+            usage = "ingredient"
 
-        list_li = soup.find_all("li")
-        for k in list_li:
-            k_childs = k.findChildren()
-            if len(k_childs)==2 and k_childs[0].name=="span" and k_childs[1].name=="span":
-                final_index = len(k_childs[0].text)-3
-                list_quantity = k_childs[1].text.split(' ')
+            list_li = soup.find_all("li")
+            for k in list_li:
+                k_childs = k.findChildren()
+                if len(k_childs)==2 and k_childs[0].name=="span" and k_childs[1].name=="span":
+                    final_index = len(k_childs[0].text)-3
+                    list_quantity = k_childs[1].text.split(' ')
 
-                add_usage = "INSERT INTO ingredient_usage(usage_name) values(%s)"
-                cursor.execute(add_usage,(usage,))
+                    usage_id = 0
+                    sql_usage_id = mysql_recipe.get_usage_id(usage)
+                    print("usage id : ",sql_usage_id)
+                    if sql_usage_id and type(sql_usage_id)==tuple:
+                        usage_id = sql_usage_id[0]
+                    else:
+                        add_usage = "INSERT INTO ingredient_usage(usage_name) values(%s)"
+                        cursor.execute(add_usage,(usage,))
+                        mysql_recipe.connection.commit()
+                        usage_id = cursor.lastrowid
+
+                    ingredient_id = 0
+                    ingredient = " ".join(k_childs[0].text.strip()[0:final_index].split())
+                    sql_ingredient_id = mysql_recipe.get_ingredient_id(ingredient)
+                    print("ingredient id : ",sql_ingredient_id)
+                    if sql_ingredient_id and type(sql_ingredient_id)==tuple:
+                        ingredient_id = sql_ingredient_id[0]
+                    else:
+                        add_ingredient = "INSERT INTO ingredient(ingredient_name) values(%s)"
+                        cursor.execute(add_ingredient,(ingredient,))
+                        mysql_recipe.connection.commit()
+                        ingredient_id = cursor.lastrowid
+
+                    try:
+                        quantity = int(list_quantity[0])
+                    except:
+                        quantity = float(list_quantity[0])
+
+                    unit = list_quantity[1]
+
+                    add_recipe_ingredient = """
+                        INSERT INTO recipe_ingredient(recipe_id,ingredient_id,usage_id,persons_count,quantity,unit)
+                        values(%s,%s,%s,%s,%s,%s)
+                    """
+                    cursor.execute(add_recipe_ingredient,(recipe_id,ingredient_id,usage_id,self.persons_count,quantity,unit))
+                    mysql_recipe.connection.commit()
+
+                    self.list_ingredients.append(
+                        {
+                            "usage": usage,
+                            "ingredient": ingredient,
+                            "quantity": quantity,
+                            "unit": unit
+                        }
+                    )
+
+                elif k.text in self.list_usages:
+                    usage = k.text
+
+            steps_name = [step.string for step in soup.find_all("span",{"class": "bold"}) if ". POUR " in step.string]
+            steps_description = soup.find_all("p",{"class": "marginT10 fz110 lh120"})
+            steps_count = len(steps_name)
+            for i in range(steps_count):
+                order = steps_name[i]
+                description = steps_description[i].text.replace("\r\n"," ").replace("\n","")
+                add_step = """insert into step_recipe(step_name,recipe_id,step_description)
+                            values('{0}',{1},'{2}');""".format(
+                                order.replace("'","\\'"),
+                                recipe_id,
+                                description.replace("'","\\'")
+                            )
+                cursor.execute(add_step)
                 mysql_recipe.connection.commit()
-                usage_id = cursor.lastrowid
-
-                ingredient = " ".join(k_childs[0].text.strip()[0:final_index].split())
-
-                add_ingredient = "INSERT INTO ingredient(ingredient_name) values(%s)"
-                cursor.execute(add_ingredient,(ingredient,))
-                mysql_recipe.connection.commit()
-                ingredient_id = cursor.lastrowid
-
-                try:
-                    quantity = int(list_quantity[0])
-                except:
-                    quantity = float(list_quantity[0])
-
-                unit = list_quantity[1]
-
-                add_recipe_ingredient = """
-                    INSERT INTO recipe_ingredient(recipe_id,ingredient_id,usage_id,persons_count,quantity,unit)
-                    values(%s,%s,%s,%s,%s,%s)
-                """
-                cursor.execute(add_recipe_ingredient,(recipe_id,ingredient_id,usage_id,self.persons_count,quantity,unit))
-                mysql_recipe.connection.commit()
-
-                self.list_ingredients.append(
+                
+                self.list_steps.append(
                     {
-                        "usage": usage,
-                        "ingredient": ingredient,
-                        "quantity": quantity,
-                        "unit": unit
+                        "order": order,
+                        "description": description
                     }
                 )
-
-            elif k.text in self.list_usages:
-                usage = k.text
-
-        steps_name = [step.string for step in soup.find_all("span",{"class": "bold"}) if ". POUR " in step.string]
-        steps_description = soup.find_all("p",{"class": "marginT10 fz110 lh120"})
-        steps_count = len(steps_name)
-        for i in range(steps_count):
-            order = steps_name[i]
-            description = steps_description[i].text.replace("\r\n"," ").replace("\n","")
-            add_step = """insert into step_recipe(step_name,recipe_id,step_description)
-                        values('{0}',{1},'{2}');""".format(
-                            order.replace("'","\\'"),
-                            recipe_id,
-                            description.replace("'","\\'")
-                        )
-            cursor.execute(add_step)
-            mysql_recipe.connection.commit()
-            
-            self.list_steps.append(
-                {
-                    "order": order,
-                    "description": description
-                }
-            )
-        cursor.close()
+            cursor.close()
 
     def display(self):
         print(self.recipe_name)
@@ -202,3 +219,27 @@ class MySQLRecipe:
             );
         """
         cursor.execute(create_db,multi=True)
+
+    def get_ingredient_id(self,ingredient_name):
+        with self.connection.cursor() as my_cursor:
+            sql_ingredient_id = "select ingredient_id from ingredient where ingredient_name='%s'"
+            my_cursor.execute(sql_ingredient_id %(ingredient_name.replace("'","\\'")))
+            ingredient_id = my_cursor.fetchone()
+            my_cursor.close()
+            return ingredient_id
+
+    def get_usage_id(self,usage_name):
+        with self.connection.cursor() as my_cursor:
+            sql_usage_id = "select usage_id from ingredient_usage where usage_name='%s'"
+            my_cursor.execute(sql_usage_id %(usage_name.replace("'","\\'")))
+            usage_id = my_cursor.fetchone()
+            my_cursor.close()
+            return usage_id
+
+    def get_recipe_id(self,recipe_name):
+        with self.connection.cursor() as my_cursor:
+            sql_recipe_id = "select recipe_id from recipe where recipe_name='%s'"
+            my_cursor.execute(sql_recipe_id %(recipe_name.replace("'","\\'")))
+            recipe_id = my_cursor.fetchone()
+            my_cursor.close()
+            return recipe_id
