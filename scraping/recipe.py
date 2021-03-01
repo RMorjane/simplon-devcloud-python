@@ -66,7 +66,8 @@ class RecipeInfo:
             print(recipe_id," : ",self.recipe_name," already exists")
         else:
             cursor = mysql_recipe.connection.cursor()
-            add_recipe = "INSERT INTO recipe(recipe_name,recipe_url) values('{0}','{1}')".format(self.recipe_name,self.url)
+            add_recipe = "INSERT INTO recipe(recipe_name,recipe_url) values('{0}','{1}')".format(
+                self.recipe_name,self.url)
             cursor.execute(add_recipe)
             mysql_recipe.connection.commit()
             recipe_id = cursor.lastrowid
@@ -111,10 +112,12 @@ class RecipeInfo:
                     unit = list_quantity[1]
 
                     add_recipe_ingredient = """
-                        INSERT INTO recipe_ingredient(recipe_id,ingredient_id,usage_id,persons_count,quantity,unit)
+                        INSERT INTO recipe_ingredient(
+                            recipe_id,ingredient_id,usage_id,persons_count,quantity,unit)
                         values(%s,%s,%s,%s,%s,%s)
                     """
-                    cursor.execute(add_recipe_ingredient,(recipe_id,ingredient_id,usage_id,self.persons_count,quantity,unit))
+                    cursor.execute(add_recipe_ingredient,(
+                        recipe_id,ingredient_id,usage_id,self.persons_count,quantity,unit))
                     mysql_recipe.connection.commit()
 
                     self.list_ingredients.append(
