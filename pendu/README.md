@@ -1,8 +1,13 @@
 # Pendu
 
-Pendu is a python application witch use two text files :
-mots.txt witch contains all french words
-and pendu.txt witch contains different pendu's state.
+Pendu is a python application in witch the user should guess the word given.
+The user had only five tentative to win. Each wrong tentative draw a state of the pendu otherwise the right caracter is displayed.
+
+## Description
+![image](https://user-images.githubusercontent.com/71873995/110121525-c8bcb280-7dbe-11eb-82f8-003d8c258a99.png)
+
+
+1 - When you load the pendu, it ask you to choose the lenght of the word you should guess.
 
 ## Installation
 
