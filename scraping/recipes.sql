@@ -5,7 +5,8 @@ use recipes;
 create table recipe(
 	recipe_id int auto_increment,
     	recipe_name varchar(100) not null,
-    	recipe_url varchar(200) not null,	
+    	recipe_url varchar(200) not null,
+	recipe_image varchar(200) not null,	
     	primary key(recipe_id)
 );
 
