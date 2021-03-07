@@ -1,4 +1,4 @@
-from recipe import RecipeCategory
+from mysql_recipe_scraper import RecipeCategory
 
 if __name__ == '__main__':
 
