@@ -1,5 +1,5 @@
 import unittest
-from recipe import RecipeCategory
+from mysql_recipe_scraper import RecipeCategory
 
 class TestRecipeCategory(unittest.TestCase):
 

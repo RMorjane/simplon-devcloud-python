@@ -1,5 +1,5 @@
 import unittest
-from recipe import MySQLRecipe
+from mysql_recipe_scraper import MySQLRecipe
 
 class TestMySQLRecipe(unittest.TestCase):
 
@@ -68,3 +68,6 @@ class TestMySQLRecipe(unittest.TestCase):
         })
         list_recipes = mysql_recipe.list_recipes
         self.assertFalse(len(list_recipes)==0)
+
+if __name__ == '__main__':
+    unittest.main()
