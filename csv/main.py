@@ -62,9 +62,9 @@ json_journeys.save_json()
 journeys = json_journeys.json_data
 
 #json_journeys.get_json_keys(journeys["journeys"][0]["sections"][1]["stop_date_times"])
-"""json_journeys.get_key_values("label",journeys["journeys"][0]["sections"][1]["stop_date_times"])
+json_journeys.get_key_values("label",journeys["journeys"][0]["sections"][1]["stop_date_times"])
 stop_areas = json_journeys.list_keys
-pprint.pprint(stop_areas)"""
+pprint.pprint(stop_areas)
 
 json_journeys.get_key_values("stop_date_times",journeys)
 stop_date_times = json_journeys.list_keys
